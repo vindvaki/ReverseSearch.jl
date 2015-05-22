@@ -1,12 +1,22 @@
 module ReverseSearch
 
-"""
-`adj` maps (vertex, index) to Union(child, None), where child is the child in the traversal tree
-`max_degree` is a nonnegative integer
-`sink` is a vertex
-`f` maps a vertex to its parent in the traversal tree
-"""
-function reverse_search_producer(adj, max_degree, sink, f)
+export reverse_search_producer
+
+
+using Docile
+@docstrings
+
+@doc """
+# Input
+
+- `adj` should be a function mapping `(vertex, n)` to `Union(child, None)`, where `child` is the `n`-th child of `vertex` in the traversal tree, or `None` if `n` is greater than the degree of `vertex` in the tree
+- `max_degree` should be a nonnegative integer denoting the maximum degree of a vertex in the tree
+- `sink` should be a vertex
+- `f` should map a vertex to its parent in the traversal tree
+
+# Output
+A producer for the nodes of the graph.
+""" -> function reverse_search_producer(adj, max_degree, sink, f)
     current_vertex = sink
     neighbor_counter = 0
     while true
