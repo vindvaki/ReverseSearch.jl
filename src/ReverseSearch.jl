@@ -1,10 +1,20 @@
 module ReverseSearch
 
-export reverse_search_producer
-
+export reverse_search_producer, ReverseSearchParams
 
 using Docile
 @docstrings
+
+type ReverseSearchParams
+    adj
+    max_degere
+    sink
+    f
+end
+
+function reverse_search_producer(p::ReverseSearchParams)
+    reverse_search_producer(p.adj, p.max_degere, p.sink, p.f)
+end
 
 @doc """
 # Input

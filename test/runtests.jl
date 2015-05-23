@@ -1,30 +1,12 @@
 using ReverseSearch
-using Base.Test
+using FactCheck
 
-n = 10
+include("../examples/complete_graph.jl")
 
-vertices = collect(1:n)
-
-function adj(vertex, index)
-    if n != vertex
-        vertices[index]
-    else
-        None
+context("reverse search graph traversal on the complete graph on 1:n") do
+    for n in 1:10
+        facts("for n=$n, every vertex is visited exactly once") do
+            @fact reverse_search_vertices_for_complete_graph(n) => collect(1:n)
+        end
     end
 end
-
-max_degree = n
-
-sink = 1
-
-function f(vertex)
-    if vertex == 1
-        None
-    else
-        vertex - 1
-    end
-end
-
-reverse_search_vertices = sort(collect(@task reverse_search_producer(adj, max_degree, sink, f)))
-
-@test reverse_search_vertices == vertices
