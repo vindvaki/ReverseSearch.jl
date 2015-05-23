@@ -2,8 +2,7 @@ module ReverseSearch
 
 export reverse_search_producer, ReverseSearchParams
 
-using Docile
-@docstrings
+VERSION < v"0.4-" && using Docile
 
 type ReverseSearchParams
     adj
@@ -12,11 +11,19 @@ type ReverseSearchParams
     f
 end
 
+@doc doc"""
+Equivalent to calling
+
+    reverse_search_producer(p.adj, p.max_degree, p.sink, p.f)
+
+Intended for use cases where `ReverseSearchParams` cleanly encapsulate some
+problem domain.
+""" ->
 function reverse_search_producer(p::ReverseSearchParams)
     reverse_search_producer(p.adj, p.max_degere, p.sink, p.f)
 end
 
-@doc """
+@doc doc"""
 # Input
 
 - `adj` should be a function mapping `(vertex, n)` to `Union(child, None)`, where `child` is the `n`-th child of `vertex` in the traversal tree, or `None` if `n` is greater than the degree of `vertex` in the tree
@@ -26,7 +33,8 @@ end
 
 # Output
 A producer for the nodes of the graph.
-""" -> function reverse_search_producer(adj, max_degree, sink, f)
+""" ->
+function reverse_search_producer(adj, max_degree, sink, f)
     current_vertex = sink
     neighbor_counter = 0
     while true
