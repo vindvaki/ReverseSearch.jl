@@ -24,7 +24,7 @@ function reverse_search_params_for_complete_graph(n)
 end
 
 function reverse_search_vertices_for_complete_graph(n)
-    revese_search_params = reverse_search_params_for_complete_graph(n)
+    reverse_search_params = reverse_search_params_for_complete_graph(n)
     reverse_search_task = @task reverse_search_producer(reverse_search_params)
     sort(collect(reverse_search_task))
 end
