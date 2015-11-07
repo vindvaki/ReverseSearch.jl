@@ -5,7 +5,7 @@ function reverse_search_params_for_complete_graph(n)
         if n != vertex
             index
         else
-            None
+            Union{}
         end
     end
 
@@ -14,7 +14,7 @@ function reverse_search_params_for_complete_graph(n)
 
     function f(vertex)
         if vertex == 1
-            None
+            Union{}
         else
             vertex - 1
         end
